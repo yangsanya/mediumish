@@ -1,1 +1,4 @@
 /mediumish/static/
+/venv/
+/mediumish/media/
+/mediumish/blog/migrations/

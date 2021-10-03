@@ -17,9 +17,6 @@ class Home(ListView):
         return context
 
 
-def postview(request):
-    return render(request, 'blog/post.html')
-
 
 class GetPost(DetailView):
     model = Post

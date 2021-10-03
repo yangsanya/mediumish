@@ -17,7 +17,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True)
     # author =
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, related_name='post_tags')
     date_created = models.DateTimeField(auto_now_add=True)
     time_to_read = models.PositiveIntegerField(blank=True)
     text = models.TextField()
