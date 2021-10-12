@@ -2,8 +2,8 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .forms import UserRegistrationForm
-
+from django.contrib.auth.decorators import login_required
+from .forms import UserRegistrationForm, UserEditForm
 
 def login_page(request):
     page = 'login'
@@ -49,3 +49,16 @@ def register_page(request):
         else:
             messages.error(request, 'An error occurred during registration')
     return render(request, 'account/register.html', {'form': form, })
+
+
+@login_required(login_url='login')
+def edit_profile(request):
+    user = request.user
+    form = UserEditForm(instance=user)
+
+    if request.method == 'POST':
+        form = UserEditForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('get_author', pk=user.id)
+    return render(request, 'account/edit_profile.html', {'form': form})
