@@ -110,7 +110,7 @@
 						<span class="post-date">{{ post.date_created|date:"j E Y" }}</span>
                                     {% if post.time_to_read %}
                                         <span class="dot"></span>
-                                        <span class="post-read">{{ post.time_to_read }} min</span>
+                                        <span class="post-read">{{ post.time_to_read }} min to read</span>
                                     {% endif %}
 						</span>
                                 <span class="post-read-more"><a href="{% url 'get_post' post.slug %}" title="Read Story"><svg
