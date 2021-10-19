@@ -21,13 +21,18 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="post.html">Create post</a>
+                    <a class="nav-link" href="{% url 'create_post' %}">Create post</a>
                 </li>
 
                 {% if user.is_authenticated %}
                      <li class="nav-item">
-                        <a class="nav-link" href="">{{ user.username }}</a>
+                        <a class="nav-link" href="{% url 'get_author' user.pk %}">{{ user.username }}</a>
                      </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'edit_profile' %}">Edit profile</a>
+                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">logout</a>
                      </li>

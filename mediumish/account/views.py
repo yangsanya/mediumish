@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegistrationForm, UserEditForm
 
+
 def login_page(request):
     page = 'login'
     # if request.user.is_authenticated:
