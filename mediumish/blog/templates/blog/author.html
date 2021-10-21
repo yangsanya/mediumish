@@ -44,7 +44,7 @@
                             {#                                <img class="img-fluid img-thumb" src="{{ post.image.url }}" alt="">#}
                             {#                            </a>#}
                             <div class="card-block">
-                                <h2 class="card-title"><a href="post.html">{{ post.title }}</a></h2>
+                                <h2 class="card-title"><a href="{% url 'get_post' post.slug %}">{{ post.title }}</a></h2>
                                 <h4 class="card-text">{{ post.text|truncatewords:20 }}</h4>
                                 <div class="metafooter">
                                     <div class="wrapfooter">
