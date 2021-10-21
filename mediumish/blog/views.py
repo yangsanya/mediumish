@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from random import randint
+
+from django.urls import reverse_lazy
 from django.utils.text import slugify
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Post
 from account.models import User
@@ -54,8 +56,20 @@ class CreatePost(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        form.instance.slug = slugify(form.instance.title)
+        form.instance.slug = slugify(form.instance.title) + '_' + form.instance.author.username + str(randint(0, 99999))
 
         return super().form_valid(form)
 
 
+class UpdatePost(LoginRequiredMixin, UpdateView):
+    model = Post
+    fields = ['title', 'tags', 'time_to_read', 'text', 'image']
+    template_name = 'blog/update_post.html'
+    login_url = 'login'
+
+
+class DeletePost(LoginRequiredMixin, DeleteView):
+    model = Post
+    login_url = 'login'
+    template_name = 'blog/confirm_to_delete.html'
+    success_url = reverse_lazy('home')

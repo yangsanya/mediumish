@@ -71,7 +71,7 @@
                     </div>
                     <!-- End Top Meta -->
 
-                    <h1 class="posttitle">{{ post.title }}</h1>
+                    <h1 class="posttitle">{{ post.title }}</h1> {% if request.user == post.author %}<a href="{% url 'update_post' post.slug %}">Edit</a> <a href="{% url 'delete-post' post.slug %}">Delete</a> {% endif %}
 
                 </div>
 

@@ -40,9 +40,9 @@
                 {% for post in author_posts %}
                     <div class="authorpostbox">
                         <div class="card">
-{#                            <a href="{% url 'get_post' post.slug %}">#}
-{#                                <img class="img-fluid img-thumb" src="{{ post.image.url }}" alt="">#}
-{#                            </a>#}
+                            {#                            <a href="{% url 'get_post' post.slug %}">#}
+                            {#                                <img class="img-fluid img-thumb" src="{{ post.image.url }}" alt="">#}
+                            {#                            </a>#}
                             <div class="card-block">
                                 <h2 class="card-title"><a href="post.html">{{ post.title }}</a></h2>
                                 <h4 class="card-text">{{ post.text|truncatewords:20 }}</h4>
@@ -59,6 +59,15 @@
 									<span class="post-date">22 July 2017</span><span class="dot"></span><span
                                                 class="post-read">{{ post.time_to_read }} min to read</span>
 									</span>
+                                        {% if request.user == post.author %}
+                                            <span class="post-read-more">
+                                            <a href="{% url 'update_post' post.slug %}">Edit post</a>
+                                        </span>
+                                            <br>
+                                            <span class="post-read-more">
+                                            <a href="{% url 'delete-post' post.slug %}">Delete post</a>
+                                        </span>
+                                        {% endif %}
                                         <span class="post-read-more"><a href="{% url 'get_post' post.slug %}"
                                                                         title="Read Story"><svg
                                                 class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25"><path
