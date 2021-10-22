@@ -72,3 +72,17 @@ class DeletePost(LoginRequiredMixin, DeleteView):
     login_url = 'login'
     template_name = 'blog/confirm_to_delete.html'
     success_url = reverse_lazy('home')
+
+
+class Search(ListView):
+    template_name = 'blog/search.html'
+    context_object_name = 'posts'
+    paginate_by = 6
+
+    def get_queryset(self):
+        return Post.objects.filter(title__icontains=self.request.GET.get('search'))
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search'] = f"s={self.request.GET.get('search')}&"
+        return context
